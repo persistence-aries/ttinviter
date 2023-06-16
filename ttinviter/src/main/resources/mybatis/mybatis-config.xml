@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+        
+<configuration>
+    <typeAliases>
+        <!-- 定义类型别名 -->
+        <typeAlias type="java.util.Map" alias="Map"/>
+    </typeAliases>
+
+    <mappers>
+        <!-- 加载映射器 -->
+        <mapper resource="mappers/usersMapper.xml"/>
+    </mappers>
+</configuration>

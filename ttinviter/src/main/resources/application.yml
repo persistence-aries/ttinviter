@@ -1,0 +1,22 @@
+  server:
+    port: 8087
+  spring:
+    resource:
+      cashe:
+        cachecontrol:
+          no-cache: true
+    datasource:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/springbootmybatis
+      username: root
+      password: passwd123
+  security:
+    user:
+      name: testad
+      password: abc123
+  mybatis:
+      config-location: classpath:mybatis/mybatis-config.xml
+      mapper-locations: classpath:mybatis/mappers/*.xml    # mapper映射位置
+      type-aliases-package: com.gouggou.shardingtable.entity    # 實體類所在的位置
+      configuration:
+        log-impl: org.apache.ibatis.logging.stdout.StdOutImpl   #console打印sql语句
