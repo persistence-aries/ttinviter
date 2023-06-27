@@ -15,7 +15,7 @@ public final class CookieUtil {
 		Cookie c = new Cookie(k, v);
 		c.setHttpOnly(true);
 		c.setSecure(false);
-		c.setPath("/ttinvider");
+		c.setPath("/ttinviter");
 		return c;
 	}
 	

@@ -11,7 +11,7 @@
 	<groupId>com.social</groupId>
 	<artifactId>ttinviter</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<name>ttinviter</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
@@ -25,7 +25,17 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+			    <exclusions>
+			      <exclusion>
+			        <groupId>org.springframework.boot</groupId>
+			        <artifactId>spring-boot-starter-logging</artifactId>
+			      </exclusion>
+			    </exclusions>
 		</dependency>
+		  <dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-log4j2</artifactId>
+		  </dependency>
 		<dependency>
 			<groupId>org.mybatis.spring.boot</groupId>
 			<artifactId>mybatis-spring-boot-starter</artifactId>
@@ -87,10 +97,10 @@
 		    <artifactId>commons-lang3</artifactId>
 		    <version>3.12.0</version>
 		</dependency>
-
 	</dependencies>
 
 	<build>
+		<finalName>${artifactId}</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

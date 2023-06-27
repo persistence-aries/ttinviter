@@ -12,7 +12,7 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 
 public class JwtUtil {
 
-	private static final String DEFAULT_ISSUER = "ttinvider";
+	private static final String DEFAULT_ISSUER = "ttinviter";
 	
 	private static final String HMAC256 = "LQGhw3C+jcu+Ju26UmGGS/Q1BmyVk3xu";
 	private static Algorithm algo = Algorithm.HMAC256(HMAC256);
