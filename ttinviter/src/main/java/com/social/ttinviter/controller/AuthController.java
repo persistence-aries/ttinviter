@@ -73,12 +73,18 @@ public class AuthController {
 	}
 	
 	@PostMapping("/register")
-	public void register(@RequestBody Map<String, String> parameter) {
+	public Map<String, Object> register(@RequestBody Map<String, String> parameter) {
+		boolean regiBool = false;
+		Map<String, Object> resultMap = new HashMap<>();
 		try {
-			userService.register(parameter);
+			regiBool = userService.register(parameter);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		resultMap.put("regiflag", regiBool);
+		
+		return resultMap;
 	}
 	
 }

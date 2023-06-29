@@ -28,18 +28,6 @@ public class UserService {
 	private static final Logger logger = LogManager.getLogger(UserService.class);
 	@Autowired
 	private UserRepository userRepository;
-//	@Autowired
-//	private UsersMapper usersMapper;
-//	
-//	public void addUser(String name, Integer age, String account, String password, String email, String create_by) {
-//		usersMapper.insert(name, age, account, password, email, create_by);
-//	}
-//	
-//	public List<Map<String, Object>> selectUser(String account) {
-//		List<Map<String, Object>> result = new ArrayList<>();
-//		result = usersMapper.findByAccount(account);
-//		return result;
-//	}
 	
 	public boolean register(Map<String, String> parameter) {
 		boolean regiBool = false;
@@ -51,6 +39,7 @@ public class UserService {
 		
 		try {
 			userRepository.addUser(name, Integer.parseInt(age), account, password, email, "SYSTEM");
+			regiBool = true;
 			logger.debug("註冊成功!!");
 		} catch (Exception e) {
 			e.printStackTrace();
