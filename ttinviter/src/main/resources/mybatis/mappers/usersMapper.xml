@@ -17,7 +17,7 @@
 	
 <!-- 	<select id="findByAccount" resultMap="UserResultMap"> -->
 	<select id="findByAccount" resultType="java.util.Map">
-		select * from users where account=#{account} AND password=#{password} 
+		select name, age, email from users where account=#{account} AND password=#{password} 
 	</select>
 	
 	<insert id="insert" parameterType="com.social.ttinviter.mapper.UsersMapper">

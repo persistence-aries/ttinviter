@@ -1,12 +1,13 @@
 package com.social.ttinviter.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,16 +37,16 @@ public class AuthController {
 	DecodedJWT decoded = null;
 	
 	@PostMapping("/login")
-	public Map<String, Object> login(@RequestBody Map<String, String> parameter) {
+	public List<Map<String, Object>> login(@RequestBody Map<String, String> parameter) {
 		logger.info("=============login controller start=============");
-		Map<String, Object> resultMap = new HashMap<>();
+		List<Map<String, Object>> result = new ArrayList<>();
 		final Cookie[] cookies = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest()
 				.getCookies();
 		DecodedJWT decoded = null;
 		boolean loginFlag = false;
 		
 		try {
-			loginFlag = userService.login(parameter);
+			result = userService.login(parameter);
 		} catch (Exception e) {
 			logger.error(e);
 			throw new TtinviterException("登入失敗，請重新登入!!");
@@ -67,9 +68,7 @@ public class AuthController {
 			}
 		}
 		
-		resultMap.put("loginflag", loginFlag);
-		
-		return resultMap;
+		return result;
 	}
 	
 	@PostMapping("/register")

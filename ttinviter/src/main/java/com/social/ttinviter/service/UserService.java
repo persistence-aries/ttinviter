@@ -20,7 +20,6 @@ import com.social.ttinviter.util.CookieUtil;
 import com.social.ttinviter.util.JwtUtil;
 import com.social.ttinviter.util.TtinviterException;
 
-import jakarta.servlet.http.Cookie;
 
 @Service
 public class UserService {
@@ -49,12 +48,13 @@ public class UserService {
 		return  regiBool;
 	}
 	
-	public boolean login(Map<String, String> parameter) {
+	public List<Map<String, Object>> login(Map<String, String> parameter) {
+		List<Map<String, Object>> result = new ArrayList<>();
 		boolean loginSuccess = false;
 		String account = parameter.get("account").toString();
 		String password = parameter.get("password").toString();
 		try {
-			List<Map<String, Object>> result = userRepository.selectUser(account, password);
+			result = userRepository.selectUser(account, password);
 			if (result.size() > 0) {
 				logger.debug("登入成功!!");
 				loginSuccess = true;
@@ -68,7 +68,7 @@ public class UserService {
 		}
 		
 		
-		return loginSuccess;
+		return result;
 	} 
 	
 }

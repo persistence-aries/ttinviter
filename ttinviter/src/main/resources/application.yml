@@ -1,3 +1,11 @@
+ server:
+  port: 8443
+  ssl:
+    enabled: true
+    key-store-type: JKS
+    key-store: classpath:keystore/baeldung.jks
+    key-store-password: 1qaz@WSX
+    key-alias: baeldung
   spring:
     resource:
       cashe:
@@ -5,7 +13,7 @@
           no-cache: true
     datasource:
       driver-class-name: com.mysql.cj.jdbc.Driver
-      url: jdbc:mysql://10.81.234.11:3306/springbootmybatis
+      url: jdbc:mysql://127.0.0.1:3306/springbootmybatis
       username: root
       password: passwd123
   security:

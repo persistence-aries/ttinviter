@@ -14,7 +14,6 @@ public class RouterController {
             "/ttinviter/pages/*",
     })
     public String forwardToIndex() {
-    	System.out.println("HERE----->>>>>");
         return "forward:/index.html";
     }
     
