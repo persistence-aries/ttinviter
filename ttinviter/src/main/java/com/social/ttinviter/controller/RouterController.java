@@ -8,10 +8,10 @@ public class RouterController {
 	
     @GetMapping(value = {
             "/ttinviter",
-            "/ttinviter/pages/welcome/",
-            "/ttinviter/pages/sign-in",
-            "/ttinviter/pages/sign-up",
-            "/ttinviter/pages/*",
+            "/ttinviter/welcome/",
+            "/ttinviter/sign-in",
+            "/ttinviter/sign-up",
+            "/ttinviter/*",
     })
     public String forwardToIndex() {
         return "forward:/index.html";
