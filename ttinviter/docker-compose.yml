@@ -1,0 +1,33 @@
+version: "3.7"
+services:
+  ttinviter:
+    build: .
+    restart: always
+    ports:
+      - 9090:8443
+    networks:
+      - springapimysql-net
+    environment:
+      SPRING.DATASOURCE.URL: jdbc:mysql://mysqldb:3306/springbootmybatis
+      MYSQL_ROOT_PASSWORD: passwd123
+      MYSQL_DATABASE: springbootmybatis    
+    depends_on:
+      - mysqldb
+    
+    volumes:
+      - .m2:/root/.mydata
+      
+  mysqldb:
+    image: "mysql:8.0"
+    restart: always
+    ports:
+      - 3337:3306
+    networks:
+      - springapimysql-net  
+    environment:
+      MYSQL_DATABASE: springbootmybatis
+      MYSQL_ROOT_PASSWORD: passwd123
+    volumes:
+      - ./sql:/docker-entrypoint-initdb.d
+networks:
+  springapimysql-net:

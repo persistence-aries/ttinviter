@@ -27,7 +27,7 @@ public class MyBatisConfig {
     public DataSource dataSource() {
         return DataSourceBuilder.create()
                 .type(HikariDataSource.class)
-                .url("jdbc:mysql://localhost:3306/springbootmybatis") // 資料庫連接URL
+                .url("jdbc:mysql://mysqldb:3306/springbootmybatis") // 資料庫連接URL
                 .username("root") //資料庫用戶名
                 .password("passwd123") // 資料庫密碼
                 .build();
