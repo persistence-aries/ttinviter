@@ -2,9 +2,10 @@ version: "3.7"
 services:
   ttinviter:
     build: .
+    image: w1001869/ttinviter:v2
     restart: always
     ports:
-      - 9090:8443
+      - 9090:8080
     networks:
       - springapimysql-net
     environment:

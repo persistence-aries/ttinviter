@@ -1,13 +1,13 @@
  server:
-  port: 8443
+  port: 8080
   servlet:
     context-path: /ttinviter
-  ssl:
-    enabled: true
-    key-store-type: JKS
-    key-store: classpath:keystore/baeldung.jks
-    key-store-password: 1qaz@WSX
-    key-alias: baeldung
+  #ssl:
+    #enabled: true
+    #key-store-type: JKS
+    #key-store: classpath:keystore/baeldung.jks
+    #key-store-password: 1qaz@WSX
+    #key-alias: baeldung
   spring:
     resource:
       cashe:
