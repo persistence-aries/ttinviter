@@ -1,5 +1,6 @@
 package com.social.ttinviter.util;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -37,5 +38,13 @@ public class DateUtil {
 			cal.add(Calendar.SECOND, second);
 		}
 		return cal.getTime();
+	}
+	
+	public static String msDateFormat(long millis) {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date date = new Date(millis);
+		String formattedDateTime = dateFormat.format(date);
+		
+		return formattedDateTime;
 	}
 }

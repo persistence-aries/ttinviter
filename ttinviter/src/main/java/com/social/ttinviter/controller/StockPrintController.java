@@ -31,6 +31,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.social.ttinviter.service.StockPrintService;
+import com.social.ttinviter.util.DateUtil;
 import com.social.ttinviter.util.TtinviterException;
 
 
@@ -45,29 +46,18 @@ public class StockPrintController {
 	@PostMapping("/get-stock")
 	public Map<String, Object> stockPrint(@RequestBody Map<String, String> parameter) throws Exception {
 		Map<String,Object> dataMap = new HashMap<>();
-		Map<String,Object> result = new HashMap<>();
 		List<Map<String, Object>> returnResult = new ArrayList<>();
 		String code = parameter.get("code");
 		String[] inputArray = code.split(",");
 		//輸入筆數
 		int inputLength = inputArray.length;
-		StringBuilder sb = new StringBuilder();
-		sb.append("https://mis.twse.com.tw/stock/api/getStockInfo.jsp?ex_ch=");
-		for (int i=0; i < inputArray.length; i++) {
-			sb.append("tse_" + inputArray[i] + ".tw");
-			if (inputArray.length != 1 || i != inputArray.length -1) {
-				sb.append("|");
-			}
-		}
-
 		try {
-			logger.info("twse_URL Request: " + sb.toString());
-			result = stockPrintService.sendGetRequest(sb.toString());
+			String url = stockPrintService.combinRequestUrl(inputArray);
+			Map<String,Object> result = stockPrintService.sendGetRequest(url);
 			returnResult = (List<Map<String, Object>>) result.get("msgArray");
 		} catch (Exception e) {
 			throw new TtinviterException("獲取twse資料有誤!!");
 		}
-		
 		dataMap.put("dataList", returnResult);
 		dataMap.put("lostNum", inputLength - returnResult.size());
 		
@@ -130,7 +120,7 @@ public class StockPrintController {
 			row.createCell(index++).setCellValue(vo.get("h") == null ? "" : vo.get("h").toString());
 			row.createCell(index++).setCellValue(vo.get("l") == null ? "" : vo.get("l").toString());
 			row.createCell(index++).setCellValue(vo.get("y") == null ? "" : vo.get("y").toString());
-			row.createCell(index++).setCellValue(vo.get("tlong") == null ? "" : msDateFormat(Long.parseLong(vo.get("tlong").toString())));
+			row.createCell(index++).setCellValue(vo.get("tlong") == null ? "" : DateUtil.msDateFormat(Long.parseLong(vo.get("tlong").toString())));
 			//自動設定欄寬
 			sheet.autoSizeColumn(i);
             sheet.setColumnWidth(i, sheet.getColumnWidth(i) * 17 / 10);
@@ -150,14 +140,5 @@ public class StockPrintController {
                 .body(new InputStreamResource(inputStream));
 
 	}
-	
-	public String msDateFormat(long millis) {
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		Date date = new Date(millis);
-		String formattedDateTime = dateFormat.format(date);
-		
-		return formattedDateTime;
-	}
-	
 	
 }
